@@ -12,7 +12,7 @@ show quest names instead of item names
 
 quest_names:
 	push {r5-r7}
-	mov r4, #0x0		@ loop counter
+	mov r4, #0x0
 	ldr r0, =QuestFlag
 	ldrb r0, [r0]
 	ldr r6, =(QuestNames)
@@ -24,7 +24,7 @@ LoadPCItem:
 	ldr r0, =(0x03005008)
 	ldr r0, [r0]
 	ldr r1, =(0x00000298)
-	add r6, r0, r1		@ start of pc item data
+	add r6, r0, r1
 	mov r7, #0x0
 	
 NameLoop:
@@ -32,45 +32,45 @@ NameLoop:
 	bne LoadQuestName
 	
 LoadItemName:
-	lsl r1, r4, #0x2	@4*loop index
-	mov r0, r6			@area to load from
+	lsl r1, r4, #0x2
+	mov r0, r6
 	add r0, r0, r1
 	ldrh r0, [r0]
 	bl PCItemName
 	b SetPointer
 	
 LoadQuestName:
-	ldr r0, =(ActivatedFlags)	@ initiation flags
-	add r0, r0, r4			@ loop index + init_flag
+	ldr r0, =(ActivatedFlags)
+	add r0, r0, r4
 	bl CheckFlag
 	cmp r0, #0x0
 	beq UnkownQuest
 
 KnownQuest:
 	mov r0, r6
-	lsl r1, r4, #0x2	@4*loop index
+	lsl r1, r4, #0x2
 	add r0, r0, r1
-	ldr r0, [r0]		@ ptr to quest name
+	ldr r0, [r0]
 	b SetPointer
 	
 UnkownQuest:
 	ldr r0, =(q_null)
 	
 SetPointer:
-	ldr r1, =(0x0203adc4)	@pcitem_list pointer
-	ldr r1, [r1]			@pcitems
-	lsl r2, r4, #0x3		@8*index
+	ldr r1, =(0x0203adc4)
+	ldr r1, [r1]
+	lsl r2, r4, #0x3
 	add r1, r1, r2
-	str r0, [r1]			@store string pointer
-	str r4, [r1, #0x4]		@store list order number
+	str r0, [r1]
+	str r4, [r1, #0x4]
 	
 NextItem:	
-	add r0, r4, #0x1	@increase loop index
+	add r0, r4, #0x1
 	lsl r0, r0, #0x10
 	lsr r4, r0, #0x10
 	ldr r0, =(0x0203adbc)
 	ldr r0, [r0]
-	ldrb r0, [r0, #0x7]		@num items to store
+	ldrb r0, [r0, #0x7]
 	cmp r4, r0
 	bcc NameLoop
 	
@@ -89,26 +89,9 @@ PCItemName:
 
 .align 2
 QuestNames:
-.word q1
-.word q2
-.word q3
-.word q4
-.word q5
-	
-q1:
-.byte Q_, u_, e_, s_, t_, _1_, 0xff
-
-q2:
-.byte L_, a_, i_, d_, Space, T_, o_, Space, R_, e_, s_, t_, 0xff
-
-q3:
-.byte Q_, u_, e_, s_, t_, _3_, 0xff
-
-q4:
-.byte Q_, u_, e_, s_, t_, _4_, 0xff
-
-q5:
-.byte F_, o_, r_, b_, i_, d_, d_, e_, n_, Space, R_, i_, t_, u_, a_, l_, 0xff
+.word <first quest name pointer>
+@etc...
+.word <last quest name pointer>
 
 q_null:
 .hword Color

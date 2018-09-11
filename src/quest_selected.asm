@@ -17,16 +17,16 @@ selected_string:
 	beq RegSel
 	
 QuestSel:
-	ldrh r0, [r5, #0x2]		@ order index (0-indexed)
+	ldrh r0, [r5, #0x2]
 	ldr r1, =(0x0203ade6)
-	ldrb r1, [r1]			@ selected option
-	cmp r1, #0x1			@ details
+	ldrb r1, [r1]
+	cmp r1, #0x1
 	beq GetDetail
-	add r0, #0x1		@ 1-indexed order
+	add r0, #0x1
 	ldr r4, =ActiveQuest
-	ldrh r1, [r4]		@ active quest (1-indexed)
+	ldrh r1, [r4]
 	cmp r1, r0
-	bne EndQuest	@swapped from beq b/c active quest already stored at this point, so opposite
+	bne EndQuest
 	
 StartQuest:
 	ldr r1, =(active_str)
@@ -52,7 +52,7 @@ Return:
 	bx r0
 	
 RegSel:
-	ldrh r1, [r5, #0x10]	@num PC item
+	ldrh r1, [r5, #0x10]
 	mov r0, r4
 	bl BagAddItem
 	ldr r1, =(0x0810e43c +1)
@@ -71,14 +71,7 @@ end_str:
 .pool
 .align 2
 deet_table:
-.word deet_1
-.word deet_2
-.word deet_3
-.word deet_4
-.word deet_5
+.word <first quest detail string pointer>
+@etc...
+.word <last quest detail string pointer>
 
-deet_1:	.byte D_, u_, d_, e_, 0xff
-deet_2:	.byte P_, e_, r_, s_, o_, n_, _2_, 0xff
-deet_3:	.byte P_, e_, r_, s_, o_, n_, _3_, 0xff
-deet_4:	.byte P_, e_, r_, s_, o_, n_, _4_, 0xff
-deet_5:	.byte P_, e_, r_, s_, o_, n_, _5_, 0xff

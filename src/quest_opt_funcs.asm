@@ -19,17 +19,17 @@ quest_opt_funcs:
 	bne QuestOptFuncs
 	
 RegOptFuncs:
-	ldr r0, =(0x08453f74)	@item storage opts
+	ldr r0, =(0x08453f74)
 	b ReturnOptFunc
 	
 QuestOptFuncs:
 	ldr r0, =var8007
-	ldrh r0, [r0]		@ selected item index
+	ldrh r0, [r0]
 	ldr r1, =ActiveQuest
 	ldrh r1, [r1]
 	cmp r1, #0x0
 	beq ActiveTable
-	add r0, #0x1		@ 1-indexed
+	add r0, #0x1
 	cmp r0, r1
 	beq DeactiveTable
 	
@@ -44,7 +44,7 @@ ReturnOptFunc:
 	lsl r1, r4, #0x3
 	add r0, #0x4
 	add r1, r1, r0
-	ldr r1, [r1]		@ function to play
+	ldr r1, [r1]
 	ldr r0, =(0x0810e394 +1)
 	bx r0
 	
