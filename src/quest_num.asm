@@ -5,15 +5,10 @@
 .global num_quests
 /*
 Store size of pc storage/quest menu. If the latter, set num quests total
-	-could also dynamically load only quest names that you have unlocked
-
-insert 00 00 00 48 00 47 xx xx xx 08 at 10ddae
-
-testing 990d4c
 */
-@.equ NumQuests, 30			@ should be possible to expand item storage size, since it uses a malloc
 
 .include "src/headers/defs.asm"
+
 num_quests:
 	ldr r1, [r4]
 	ldr r0, =QuestFlag
@@ -36,7 +31,3 @@ PCItemCount:
 	ldr r3, =(0x03005008)
 	ldr r0, =(0x0810ddb6 +1)
 	bx r0
-
-@.align 2
-@.QuestFlag:	.word 0x0203e061
-
