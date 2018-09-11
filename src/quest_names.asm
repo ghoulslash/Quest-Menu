@@ -4,9 +4,7 @@
 .thumb_func
 .global quest_names
 /*
-insert 00 00 00 48 00 47 xx xx xx 08 at 10d87a
-
-doesn't work for quest1!!!!!!!!!!
+show quest names instead of item names
 */
 
 .include "src/headers/chars.asm"
@@ -14,7 +12,7 @@ doesn't work for quest1!!!!!!!!!!
 
 quest_names:
 	push {r5-r7}
-	mov r4, #0x0	@loop counter
+	mov r4, #0x0		@ loop counter
 	ldr r0, =QuestFlag
 	ldrb r0, [r0]
 	ldr r6, =(QuestNames)
@@ -42,7 +40,7 @@ LoadItemName:
 	b SetPointer
 	
 LoadQuestName:
-	ldr r0, =(StartFlags)	@ initiation flags
+	ldr r0, =(ActivatedFlags)	@ initiation flags
 	add r0, r0, r4			@ loop index + init_flag
 	bl CheckFlag
 	cmp r0, #0x0
@@ -89,37 +87,28 @@ PCItemName:
 	ldr r1, =(0x0809a8bc +1)
 	bx r1
 
+.align 2
 QuestNames:
 .word q1
 .word q2
 .word q3
 .word q4
 .word q5
-.word q6
-.word q7
-.word q8
-.word q9
-.word q10
-.word q11
-.word q12
-.word q13
-.word q14
-.word q15
-.word q16
-.word q17
-.word q18
-.word q19
-.word q20
-.word q21
-.word q22
-.word q23
-.word q24
-.word q25
-.word q26
-.word q27
-.word q28
-.word q29
-.word q30
+	
+q1:
+.byte Q_, u_, e_, s_, t_, _1_, 0xff
+
+q2:
+.byte L_, a_, i_, d_, Space, T_, o_, Space, R_, e_, s_, t_, 0xff
+
+q3:
+.byte Q_, u_, e_, s_, t_, _3_, 0xff
+
+q4:
+.byte Q_, u_, e_, s_, t_, _4_, 0xff
+
+q5:
+.byte F_, o_, r_, b_, i_, d_, d_, e_, n_, Space, R_, i_, t_, u_, a_, l_, 0xff
 
 q_null:
 .hword Color

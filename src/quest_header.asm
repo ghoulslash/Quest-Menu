@@ -4,16 +4,11 @@
 .thumb_func
 .global header_box
 /*
-make box say "Side Quests" instead of "Withdraw Item"
-
-
-insert 00 48 00 47 xx xx xx 08 at 10db38
+make top left box say "Quests" instead of "Withdraw Item"
 */
 
 .include "src/headers/chars.asm"
 .include "src/headers/defs.asm"
-
-@.equ Offset, 0x8990cc0
 
 header_box:
 	ldr r1, =QuestFlag
@@ -36,10 +31,6 @@ HeaderReturn:
 	ldr r3, =(0x0810db42 +1)
 	bx r3	
 
-@.align 2
-@.QuestFlag:	.word 0x0203e061
-	
 header_string:
-.hword Color
-.byte C_light_green, Space, Space, S_, i_, d_, e_, NewLine, Space, Q_, u_, e_, s_, t_, s_, 0xff
+.byte Space, Space, Q_, u_, e_, s_, t_, s_, 0xff
 

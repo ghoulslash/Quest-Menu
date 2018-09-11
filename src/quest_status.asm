@@ -4,23 +4,10 @@
 .thumb_func
 .global quest_status
 /*
-insert 00 48 00 47 xx xx xx 08 at 10da60
 
-r4 is index
-
-
-
-NOTES
-	-'complete' runs off screen...possible to move back a bit?
-			-x pos at 10da98
 */
 
 .include "src/headers/defs.asm"
-
-@.equ Offset, 0x0899010c
-
-@.equ CompletedFlags, 0x2100
-
 .include "src/headers/chars.asm"
 
 quest_status:
@@ -43,7 +30,7 @@ CheckActive:
 	ldr r1, =ActiveQuest
 	ldrh r1, [r1]
 	cmp r1, #0x0
-	beq CheckStatus			@no side quest active
+	beq CheckStatus
 	sub r1, #0x1
 	cmp r1, r0
 	bne CheckStatus
@@ -53,11 +40,11 @@ Active:
 	b Decoder
 	
 CheckStatus:
-	ldr r1, =(DoneFlags)  @ flag 2100 is first flag
-	add r0, r0, r1			@ flag + index order
+	ldr r1, =(CompletedFlags)
+	add r0, r0, r1
 	lsl r0, r0, #0x10
-	lsr r0, r0, #0x10		@ completion flag for this quest
-	bl CheckFlag			@ check flag
+	lsr r0, r0, #0x10
+	bl CheckFlag
 	cmp r0, #0x0
 	beq Null
 	
