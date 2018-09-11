@@ -5,11 +5,12 @@
 .global definitions
 
 /*	CHANGE THESE	*/
-.equ NumQuests, 5
-.equ ActivatedFlags, 0x2100
-.equ CompletedFlags, 0x2200
-.equ QuestFlag, 0x0203e050		@ free ram byte -> flag for hack to function
-.equ ActiveQuest, 0x0203c014	@ free ram byte -> active quest index
+.equ NumQuests, xxxxxxxxxxxxxxx
+.equ ActivatedFlags, xxxxxxxxxxxxxxx		@ start of flags that show quest name
+.equ CompletedFlags, xxxxxxxxxxxxxxx		@ start of flags that indicate completed quest
+.equ QuestFlag, 0x02xxxxxx				@ free ram byte -> flag for hack to function
+.equ ActiveQuest, 0x02xxxxxx			@ free ram byte -> active quest index
+
 
 .equ CurrentMap, 0x02036dfc
 .equ DisplayedString, 0x02021d18

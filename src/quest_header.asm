@@ -32,5 +32,5 @@ HeaderReturn:
 	bx r3	
 
 header_string:
-.byte Space, Space, Q_, u_, e_, s_, t_, s_, 0xff
+.byte Space, Q_, u_, e_, s_, t_, s_, 0xff
 

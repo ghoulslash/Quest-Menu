@@ -16,13 +16,13 @@ quest_malloc:
 	beq Item_malloc
 	
 Quest_malloc:
-	ldr r0, =( (NumQuests+1) * 8)	@num quests+cancel, 8 bytes each
+	ldr r0, =( (NumQuests+1) * 8)
 	lsl r0, r0, #0x10
 	lsr r0, r0, #0x10
 	b Finish
 	
 Item_malloc:
-	mov r0, #(31*8)		@30 items + cancel * 8 bytes per
+	mov r0, #(31*8)
 	
 Finish:
 	bl MemAlloc

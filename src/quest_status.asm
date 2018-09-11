@@ -3,9 +3,6 @@
 .thumb
 .thumb_func
 .global quest_status
-/*
-
-*/
 
 .include "src/headers/defs.asm"
 .include "src/headers/chars.asm"

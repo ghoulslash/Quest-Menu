@@ -11,7 +11,7 @@ change the strings loaded in the multichoice when selecting an item in the quest
 .include "src/headers/chars.asm"
 
 quest_opt_strings:
-	mov r5, #0x3	@number of options
+	mov r5, #0x3
 	str r5, [sp, #0x4]
 	ldr r0, =QuestFlag
 	ldrb r0, [r0]
@@ -19,20 +19,20 @@ quest_opt_strings:
 	bne QuestOptStrs
 	
 RegOptStrs:
-	ldr r0, =(0x08453f74)	@item storage strings/funcs
+	ldr r0, =(0x08453f74)
 	b Return
 	
 QuestOptStrs:
-	ldrh r1, [r6, #0x2]		@ selected quest index
+	ldrh r1, [r6, #0x2]
 	ldr r0, =var8007
-	strh r1, [r0]		@ store selected quest index into var8007
+	strh r1, [r0]
 
 QuestOpts:
 	ldr r0, =ActiveQuest
-	ldrh r0, [r0]		@ current quest, 1-indexed (eg. index 0 = quest 1)
+	ldrh r0, [r0]
 	cmp r0, #0x0
 	beq Activate
-	add r1, #0x1		@ quest index is 1-indexed
+	add r1, #0x1
 	cmp r0, r1
 	beq Deactivate
 
@@ -54,7 +54,7 @@ Start_Opts:
 .word 0
 .word details_str
 .word 0
-.word 0x084161c1	@cancel
+.word 0x084161c1
 .word 0
 
 .align 2
@@ -63,7 +63,7 @@ Stop_Opts:
 .word 0
 .word details_str
 .word 0
-.word 0x084161c1	@cancel
+.word 0x084161c1
 .word 0
 
 start_str:
