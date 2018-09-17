@@ -21,7 +21,12 @@ Compilation:
 How to Use:
 1. In a script (XSE):
 	writebytetooffset 0x1 [QUESTFLAG_RAM]   // set the hack ram flag
+	
 	fadescreen 0x1
+	
 	callasm 0x80EBCD9       // open the menu
+	
 	waitstate
+	
 2. No need to reset the flag, the callback function takes care of this.
+3. example GIF: https://imgur.com/QMNaMDN
