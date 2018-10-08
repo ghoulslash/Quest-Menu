@@ -1,5 +1,6 @@
 ﻿QUEST MENU PUBLIC SOURCE CODE
 1. Public source code for side quest menu hack
+2. This system is an organization tool for the player to track their side quests or tasks throughout the game.
 
 Features:
 1. Hacks the PC Item Storage to show side quests instead of pc items.
@@ -13,6 +14,7 @@ Compilation:
 2. Place a bpre0.gba in the extracted folder
 3. Edit insertion address at bottom of insert.s
 4. Edit all custom RAM definitions in src/headers/defs.asm
+4a. The activation flags cause the quest name to appear in the menu. You need <NumQuests> number of activation flags in succession starting at flag 0x"ActiveFlags", and <NumQuests> completion flags in succession, starting from "CompletionFlags"
 5. Make table of quest names at bottom of src/quest_names.asm
 6. Make table of quest descriptions/item IDs in src/quest_descriptions.asm
 7. Make table of quest details in src/quest_selected.asm
@@ -30,3 +32,4 @@ How to Use:
 	
 2. No need to reset the flag, the callback function takes care of this.
 3. example GIF: https://imgur.com/QMNaMDN
+
