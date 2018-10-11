@@ -31,5 +31,4 @@ How to Use:
 	waitstate
 	
 2. No need to reset the flag, the callback function takes care of this.
-3. example GIF: https://imgur.com/QMNaMDN
 
