@@ -32,3 +32,4 @@ How to Use:
 	
 2. No need to reset the flag, the callback function takes care of this.
 
+credits to koople
